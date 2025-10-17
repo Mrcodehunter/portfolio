@@ -40,7 +40,7 @@
 /* Name/role/company centered below image */
 .profile-meta { margin-bottom: 14px; }
 .profile-name { font-size: 22px; margin: 0 0 6px; }
-.profile-role, .profile-company { font-size: 14px; color: var(--muted); margin: 0; }
+.profile-role, .profile-company { font-size: 18px; color: var(--muted); margin: 0; }
 .profile-role { margin-bottom: 2px; }
 
 /* Icon-only row with even spacing */
@@ -53,10 +53,15 @@
 }
 .icon-btn {
   width: 40px; height: 40px;
-  display: inline-flex; align-items: center; justify-content: center;
-  border: 1px solid var(--border); border-radius: 12px;
-  background: transparent; color: var(--muted);
-  text-decoration: none; cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: transparent;
+  color: var(--muted);
+  text-decoration: none;
+  cursor: pointer;
   transition: background .15s ease, color .15s ease, transform .05s ease;
 }
 .icon-btn:hover { color: var(--fg); background: rgba(127,127,127,0.08); }
@@ -73,13 +78,13 @@
   padding: 20px;
 }
 .bio-title {
-  font-size: 20px;
+  font-size: 23px;
   margin: 0 0 8px;
 }
 .bio p {
   margin: 0 0 12px;
   line-height: 1.65;
-  font-size: 15px;
+  font-size: 18px;
 }
 
 /* Responsive */

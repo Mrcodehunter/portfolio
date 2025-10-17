@@ -12,9 +12,9 @@ export default function Home() {
           />
 
           <div className="profile-meta">
-            <h1 className="profile-name">Your Name</h1>
-            <div className="profile-role">IT Consultant</div>
-            <div className="profile-company">KPMG NTS Cloud Team</div>
+            <h1 className="profile-name">Murad Hossen</h1>
+            <div className="profile-role">Software Engineer</div>
+            <div className="profile-company">Cefalo Bangladesh Ltd.</div>
           </div>
 
           <nav className="profile-icons" aria-label="Profile links">
@@ -42,10 +42,13 @@ export default function Home() {
         <article className="bio">
           <h2 className="bio-title">Biography</h2>
           <p>
-            IT Consultant specializing in Azure-based automation and platform engineering...
+            Murad Hossen is a Software Engineer at Cefalo Bangladesh, building reliable, scalable web platforms with a focus on clean architecture, performance, and maintainability.
+            He serves as a consultant for KPMG, contributing to Azure-centric automation and integration projects that streamline service delivery and reduce operational toil.
+            With hands-on experience across React, Node.js/.NET, REST/GraphQL, CI/CD, and cloud services (Azure App Service, Functions, pipelines), Murad enjoys turning complex requirements into simple, secure, and observable systems.
           </p>
           <p>
-            Recent work includes a cloud automation platform for KPMG Nordic...
+            Passionate about developer experience and measurable impact, Murad is especially interested in platform engineering, event-driven design, and building automation that eliminates repetitive tasks at scale.
+            Current goals include deepening expertise in distributed systems and cloud security, mentoring engineers on pragmatic design, and leading initiatives that raise reliability (SLOs, tracing, audits) while speeding up delivery for both Cefalo and consulting clients.
           </p>
         </article>
       </div>
