@@ -14,11 +14,16 @@ const NAV_ITEMS = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [theme, setTheme] = useState(() => localStorage.getItem("theme-mode") || "light"); // <-- no auto
   const [active, setActive] = useState("#home");
   const [query, setQuery] = useState("");
-  const [themeOpen, setThemeOpen] = useState(false);
   const clearTimer = useRef(null);
+  const [theme, setTheme] = useState(() => localStorage.getItem("theme-mode") || "light");
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("theme-dark", theme === "dark");
+    localStorage.setItem("theme-mode", theme);
+  }, [theme]);
+
 
   // Smooth anchor scrolling
   useEffect(() => {
@@ -108,8 +113,6 @@ export default function Navbar() {
 
   };
 
-  const setThemeAndClose = (mode) => { setTheme(mode); setThemeOpen(false); };
-
   // Choose icon: sun when dark (visible); moon when light
   const ThemeIcon = () =>
     theme === "dark" ? (
@@ -158,23 +161,15 @@ export default function Navbar() {
             </button>
           </form>
 
-          {/* Theme icon with hover dropdown (only light/dark) */}
-          <div className={`theme-menu ${themeOpen ? "open" : ""}`}>
+          <button
+            className="theme-trigger"
+            aria-label="Toggle theme"
+            aria-pressed={theme === "dark"}
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          >
+            <ThemeIcon />
+          </button>
 
-            <button
-              className="theme-trigger"
-              aria-haspopup="menu"
-              aria-expanded={themeOpen}
-              aria-label="Theme"
-              onClick={() => setThemeOpen((v) => !v)}
-            >
-              <ThemeIcon />
-            </button>
-            <ul className="theme-options" role="menu">
-              <li role="menuitem"><button onClick={() => setThemeAndClose("light")}>Light</button></li>
-              <li role="menuitem"><button onClick={() => setThemeAndClose("dark")}>Dark</button></li>
-            </ul>
-          </div>
         </div>
 
         <button className="burger" aria-label="Toggle menu" onClick={() => setOpen(v => !v)}>
@@ -216,16 +211,15 @@ export default function Navbar() {
                 </button>
               </form>
 
-              {/* Mobile theme: keep menu open inline */}
-              <div className="theme-menu open">
-                <button className="theme-trigger" aria-haspopup="menu" aria-expanded="true" aria-label="Theme">
-                  <ThemeIcon />
-                </button>
-                <ul className="theme-options" role="menu">
-                  <li role="menuitem"><button onClick={() => setThemeAndClose("light")}>Light</button></li>
-                  <li role="menuitem"><button onClick={() => setThemeAndClose("dark")}>Dark</button></li>
-                </ul>
-              </div>
+              <button
+                className="theme-trigger"
+                aria-label="Toggle theme"
+                aria-pressed={theme === "dark"}
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              >
+                <ThemeIcon />
+              </button>
+
             </li>
           </ul>
         </div>

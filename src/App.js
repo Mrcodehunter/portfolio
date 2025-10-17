@@ -2,7 +2,7 @@ import './App.css';
 import Navbar from './Pages/Navbar';
 import Home from './Pages/Home';
 import Contact from './Pages/Contact';
-import About from './Pages/About';
+import Experience from './Pages/Experience';
 
 function App() {
   return (
@@ -11,10 +11,10 @@ function App() {
       <main className="main-with-navbar">
         {/* your sections with matching IDs */}
         <section id="home"><Home/></section>
-        <section id="experience"><About/></section>
+        <section id="experience"><Experience/></section>
         <section id="achievements"><Contact/></section>
         <section id="projects"><Home/></section>
-        <section id="publications"><About/></section>
+        <section id="publications"><Experience/></section>
         <section id="posts"><Contact/></section>
         <section id="contact"><Contact/></section>
       </main>

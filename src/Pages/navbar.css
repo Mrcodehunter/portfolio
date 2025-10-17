@@ -104,11 +104,6 @@ html, body {
 }
 .nav-search button:hover { color: var(--fg); background: rgba(127,127,127,0.08); }
 
-/* Theme icon + dropdown */
-.theme-menu {
-  position: relative;
-  display: inline-block;
-}
 .theme-trigger {
   width: 32px; height: 32px;
   border: 1px solid var(--border);
@@ -119,48 +114,6 @@ html, body {
   cursor: pointer;
 }
 .theme-trigger:hover { border-color: rgba(127,127,127,0.35); filter: brightness(1.1); }
-
-.theme-options {
-  position: absolute;
-  right: 0;
-  top: 100%;           /* no gap under trigger */
-  margin-top: 6px;     /* visual spacing, still within hover area */
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-  list-style: none;
-  margin-left: 0;
-  padding: 6px;
-  min-width: 160px;
-  display: none;
-  z-index: 20;
-}
-/* Keep menu open when hovering trigger or menu, or when .open is set (mobile) */
-.theme-menu:hover .theme-options,
-.theme-menu:focus-within .theme-options,
-.theme-menu.open .theme-options { display: block; }
-/* Invisible hover bridge to prevent flicker between trigger & menu */
-.theme-menu::after {
-  content: "";
-  position: absolute;
-  left: 0; right: 0; top: 100%;
-  height: 12px;
-}
-
-.theme-options li { margin: 0; }
-.theme-options button {
-  width: 100%;
-  text-align: left;
-  border: none;
-  background: transparent;
-  color: var(--fg);
-  padding: 8px 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 14px;
-}
-.theme-options button:hover { background: rgba(127,127,127,0.08); }
 
 /* ========== Burger (Mobile) ============================================= */
 .burger {
@@ -262,3 +215,14 @@ mark.__navhl {
 
 .theme-trigger svg { fill: currentColor; }  /* make SVG follow .theme-trigger color */
 
+.theme-trigger {
+  width: 32px; height: 32px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--icon);          /* <-- icon follows this color */
+  border-radius: 8px;
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer;
+}
+.theme-trigger svg { fill: currentColor; }
+.theme-trigger:hover { border-color: rgba(127,127,127,0.35); filter: brightness(1.1); }
