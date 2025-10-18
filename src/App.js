@@ -1,25 +1,46 @@
-import './App.css';
-import Navbar from './Pages/Navbar';
-import Home from './Pages/Home';
-import Contact from './Pages/Contact';
-import Experience from './Pages/Experience';
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-function App() {
+import Navbar from "./Pages/Navbar";
+import Home from "./Pages/Home";
+import Contact from "./Pages/Contact";
+import Experience from "./Pages/Experience";
+import Projects from "./Pages/Projects";
+import Achievements from "./Pages/Achievements";
+import Publications from "./Pages/Publications";
+import PostsPreview from "./Pages/PostsPreview";  // two-card preview
+import PostsPage from "./Pages/Posts";        // full list with expand
+
+function LandingSections() {
   return (
-    <>
-      <Navbar />
-      <main className="main-with-navbar">
-        {/* your sections with matching IDs */}
-        <section id="home"><Home/></section>
-        <section id="experience"><Experience/></section>
-        <section id="achievements"><Contact/></section>
-        <section id="projects"><Home/></section>
-        <section id="publications"><Experience/></section>
-        <section id="posts"><Contact/></section>
-        <section id="contact"><Contact/></section>
-      </main>
-    </>
+    <main className="main-with-navbar">
+      <section id="home"><Home /></section>
+      <section id="experience"><Experience /></section>
+      <section id="achievements"><Achievements /></section>
+      <section id="projects"><Projects /></section>
+      <section id="publications"><Publications /></section>
+
+      {/* ⬇️ show the 2-card preview here */}
+      <section id="posts"><PostsPreview /></section>
+
+      <section id="contact"><Contact /></section>
+    </main>
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Navbar />
+      <Routes>
+        {/* Landing with all sections */}
+        <Route path="/" element={<LandingSections />} />
+
+        {/* Dedicated posts page (auto-expands when navigated from preview) */}
+        <Route path="/posts" element={<PostsPage />} />
+        {/* Optional: deep link like /posts/:id */}
+        <Route path="/posts/:id" element={<PostsPage />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}

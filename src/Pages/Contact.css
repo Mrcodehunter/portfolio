@@ -1,0 +1,94 @@
+/* Section shell */
+.ct { padding: 32px 16px; background: var(--bg); color: var(--fg); }
+.ct-grid {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 30% 70%;   /* two-column layout */
+  gap: 28px;
+  align-items: start;
+}
+
+/* LEFT column */
+.ct-left {
+  position: sticky;
+  top: 88px; /* sit under fixed navbar */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.ct-photo {
+  width: 180px; height: 180px;
+  object-fit: cover;
+  border-radius: 50%;                 /* circular */
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.10);
+}
+.ct-keyword {
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  font-size: 12px;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: transparent;
+}
+
+/* RIGHT column */
+.ct-title { font-size: 22px; margin: 0 0 12px; }
+
+.ct-form {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
+  padding: 14px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+}
+
+.ct-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.ct-full { display: block; margin-top: 12px; }
+.ct-form label { display: grid; gap: 6px; font-size: 13px; color: var(--muted); }
+.ct-form input, .ct-form textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--fg);
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+.ct-form input::placeholder, .ct-form textarea::placeholder { color: var(--muted); }
+.ct-actions { margin-top: 12px; display: flex; gap: 10px; }
+
+/* Buttons (use your global .btn/.btn-primary if you already have them) */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 36px; padding: 0 14px; border-radius: 8px;
+  font-size: 14px; text-decoration: none; cursor: pointer;
+  color: var(--fg); background: transparent; border: 1px solid var(--border);
+}
+.btn:hover { background: rgba(127,127,127,0.08); }
+.btn-primary { color: var(--bg); background: var(--fg); border-color: var(--fg); }
+.theme-dark .btn-primary { color: #111; background: #ffd54a; border-color: #ffd54a; }
+
+/* Quick contact links */
+.ct-links {
+  list-style: none;
+  padding: 0; margin: 14px 0 0;
+  display: grid; gap: 8px;
+}
+.ct-links a {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--muted); text-decoration: none;
+}
+.ct-links a:hover { color: var(--fg); }
+.ct-links svg { fill: currentColor; }
+
+/* Responsive */
+@media (max-width: 980px) {
+  .ct-grid { grid-template-columns: 1fr; }
+  .ct-left { position: static; align-items: flex-start; }
+  .ct-row { grid-template-columns: 1fr; }
+}
