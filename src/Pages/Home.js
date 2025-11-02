@@ -1,4 +1,5 @@
 import "./Home.css";
+import profileImage from "./../Assets/profile.jpg"
 
 export default function Home() {
   return (
@@ -7,7 +8,7 @@ export default function Home() {
         <aside className="profile">
           <img
             className="profile-photo"
-            src="./../Assets/profile.jpg"
+            src={profileImage}
             alt="Your Name portrait"
           />
 

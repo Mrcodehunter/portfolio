@@ -1,4 +1,5 @@
 import "./Experience.css";
+import experienceImage from "./../Assets/workexperience.png"
 
 const EXPERIENCES = [
   {
@@ -42,7 +43,7 @@ export default function Experience() {
         <aside className="exp2-left">
           <img
             className="exp2-photo"
-            src="../Assets/workexperience.png"            /* replace with your path */
+            src={experienceImage}           /* replace with your path */
             alt="Profile"
           />
           <div className="exp2-keyword">Experience</div>
@@ -53,7 +54,6 @@ export default function Experience() {
           <ol className="exp2-timeline">
             {EXPERIENCES.map((job, i) => (
               <li className="exp2-item" key={i}>
-                <div className="exp2-dot" aria-hidden="true" />
                 <article className="exp2-card">
                   <header className="exp2-head">
                     <h3 className="exp2-role">{job.role}</h3>
