@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Contact.css";
+// import contactImage from "../Assets/contact.png"; // Assume you have an image or use avatar
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
@@ -8,7 +9,7 @@ export default function Contact() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const to = "you@example.com"; // <-- change
+    const to = "you@example.com"; 
     const subject = encodeURIComponent(form.subject || `Message from ${form.name || "Website"}`);
     const body = encodeURIComponent(
       `Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`
@@ -17,132 +18,123 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="ct">
+    <section id="contact" className="ct-section">
       <div className="ct-grid">
-        {/* LEFT: circular image + keyword */}
-        <aside className="ct-left">
-          <img className="ct-photo" src="/avatar.jpg" alt="Profile" /> {/* replace path */}
-          <div className="ct-keyword">Contact</div>
-        </aside>
+        {/* LEFT: Image + Title Centered */}
+        <div className="ct-left">
+           {/* Use a specific contact image or your avatar */}
+          <img 
+            className="ct-hero-img" 
+            src="/avatar.jpg" 
+            alt="Contact" 
+          />
+          <h1 className="ct-title">Contact</h1>
+        </div>
 
-        {/* RIGHT: contact form + quick links */}
+        {/* RIGHT: Contact Form + Links */}
         <div className="ct-right">
-          <h2 className="ct-title">Get in touch</h2>
+          
+          <div className="ct-card">
+            <h2 className="ct-card-title">Send a Message</h2>
+            <form className="ct-form" onSubmit={onSubmit}>
+              <div className="ct-row">
+                <div className="ct-group">
+                  <label>Name</label>
+                  <input
+                    name="name"
+                    type="text"
+                    placeholder="Your Name"
+                    value={form.name}
+                    onChange={onChange}
+                    required
+                  />
+                </div>
+                <div className="ct-group">
+                  <label>Email</label>
+                  <input
+                    name="email"
+                    type="email"
+                    placeholder="you@domain.com"
+                    value={form.email}
+                    onChange={onChange}
+                    required
+                  />
+                </div>
+              </div>
 
-          <form className="ct-form" onSubmit={onSubmit}>
-            <div className="ct-row">
-              <label>
-                <span>Name</span>
+              <div className="ct-group">
+                <label>Subject</label>
                 <input
-                  name="name"
+                  name="subject"
                   type="text"
-                  placeholder="Your name"
-                  value={form.name}
+                  placeholder="Subject"
+                  value={form.subject}
+                  onChange={onChange}
+                />
+              </div>
+
+              <div className="ct-group">
+                <label>Message</label>
+                <textarea
+                  name="message"
+                  rows="5"
+                  placeholder="How can we help you?"
+                  value={form.message}
                   onChange={onChange}
                   required
                 />
-              </label>
+              </div>
 
-              <label>
-                <span>Email</span>
-                <input
-                  name="email"
-                  type="email"
-                  placeholder="you@domain.com"
-                  value={form.email}
-                  onChange={onChange}
-                  required
-                />
-              </label>
-            </div>
+              <button type="submit" className="ct-submit-btn">
+                Send Message
+              </button>
+            </form>
+          </div>
 
-            <label className="ct-full">
-              <span>Subject</span>
-              <input
-                name="subject"
-                type="text"
-                placeholder="Subject"
-                value={form.subject}
-                onChange={onChange}
-              />
-            </label>
+          {/* Social Links / Contact Info */}
+          <div className="ct-links-container">
+            <h3 className="ct-links-title">Connect with me</h3>
+            <ul className="ct-links">
+              <li>
+                <a href="mailto:you@example.com" aria-label="Email">
+                  {MailIcon()} <span>you@example.com</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://scholar.google.com/" target="_blank" rel="noreferrer">
+                  {ScholarIcon()} <span>Google Scholar</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/" target="_blank" rel="noreferrer">
+                  {GitHubIcon()} <span>GitHub</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/" target="_blank" rel="noreferrer">
+                  {LinkedInIcon()} <span>LinkedIn</span>
+                </a>
+              </li>
+            </ul>
+          </div>
 
-            <label className="ct-full">
-              <span>Message</span>
-              <textarea
-                name="message"
-                rows="6"
-                placeholder="Write your message..."
-                value={form.message}
-                onChange={onChange}
-                required
-              />
-            </label>
-
-            <div className="ct-actions">
-              <button type="submit" className="btn btn-primary">Send</button>
-              <a className="btn" href="mailto:you@example.com">Email directly</a>
-            </div>
-          </form>
-
-          <ul className="ct-links" aria-label="Quick contacts">
-            <li>
-              <a href="mailto:you@example.com" aria-label="Email">
-                {MailIcon()} <span>you@example.com</span>
-              </a>
-            </li>
-            <li>
-              <a href="https://scholar.google.com/citations?user=YOUR_ID" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar">
-                {ScholarIcon()} <span>Google Scholar</span>
-              </a>
-            </li>
-            <li>
-              <a href="https://github.com/yourhandle" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                {GitHubIcon()} <span>GitHub</span>
-              </a>
-            </li>
-            <li>
-              <a href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                {LinkedInIcon()} <span>LinkedIn</span>
-              </a>
-            </li>
-            <li>
-              <a href="/cv.pdf" target="_blank" rel="noopener noreferrer" aria-label="CV">
-                {DocIcon()} <span>CV</span>
-              </a>
-            </li>
-          </ul>
         </div>
       </div>
     </section>
   );
 }
 
-/* --- tiny inline SVGs --- */
+/* --- SVG Icons (Kept same) --- */
 function MailIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20 4H4a2 2 0 0 0-2 2v12a2
-    2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5L4 8V6l8 5 8-5Z"/></svg>
-  );
+  return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>;
 }
 function ScholarIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3 1 8l11 5 9-4.09V17h2V8L12 3Zm-1 13.5-7-3.18V18c0 .83.67 1.5 1.5 1.5H17v-2H6.91c-.51 0-.91-.4-.91-.9v-2.28l5 2.27c.62.28 1.38.28 2 0Z"/></svg>
-  );
+  return <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 0 1-7-7c0-2.21 1.1-4.16 2.82-5.46a6.97 6.97 0 0 1-.22-1.79L1 7.25l11-4.75 11 4.75-6.6 2.5a6.99 6.99 0 0 1-.22 1.79A7.01 7.01 0 0 1 12 24z"/></svg>;
 }
 function GitHubIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5A12 12 0 0 0 0 12.8c0 5.4 3.4 10 8.2 11.6.6.1.8-.3.8-.6v-2c-3.3.8-4-1.4-4-1.4-.6-1.4-1.5-1.8-1.5-1.8-1.2-.8.1-.8.1-.8 1.3.1 2 1.4 2 1.4 1.2 2 3.1 1.4 3.8 1 .1-.9.5-1.4.9-1.7-2.7-.3-5.5-1.4-5.5-6.2 0-1.4.5-2.6 1.3-3.5-.1-.3-.6-1.8.1-3.7 0 0 1-.3 3.6 1.3 1-.3 2-.4 3-.4s2 .1 3 .4c2.6-1.6 3.6-1.3 3.6-1.3.7 1.9.3 3.4.1 3.7.8.9 1.3 2.1 1.3 3.5 0 4.9-2.8 5.9-5.5 6.2.5.4 1 1.2 1 2.4v3.5c0 .3.2.7.8.6A12.3 12.3 0 0 0 24 12.8 12 12 0 0 0 12 .5Z"/></svg>
-  );
+  return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>;
 }
 function LinkedInIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.44-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.44v6.3zM5.34 7.44c-1.14 0-2.07-.93-2.07-2.08 0-1.15.93-2.08 2.07-2.08 1.15 0 2.08.93 2.08 2.08 0 1.15-.93 2.08-2.08 2.08zM7.11 20.45H3.58V9h3.53v11.45z"/></svg>
-  );
+  return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>;
 }
-function DocIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M14 2H6a2 2 0 0 0-2 2v16a2
-  2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Zm0 2 4 4h-4zM8 12h8v2H8zm0 4h8v2H8z"/></svg>
-  );
-}
+function DocIcon() { return null; } // Not used in this version but can be kept

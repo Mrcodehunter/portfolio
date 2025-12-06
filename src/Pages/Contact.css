@@ -1,94 +1,211 @@
-/* Section shell */
-.ct { padding: 32px 16px; background: var(--bg); color: var(--fg); }
+/* Container & Grid Setup (Matches Experience) */
+.ct-section {
+  padding: 60px 20px;
+  background-color: var(--bg);
+  color: var(--fg);
+}
+
 .ct-grid {
-  max-width: 1120px;
+  max-width: 1100px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 30% 70%;   /* two-column layout */
-  gap: 28px;
-  align-items: start;
+  /* LEFT (Title) takes ~30%, RIGHT (Content) takes rest */
+  grid-template-columns: 30% 1fr; 
+  gap: 40px;
 }
 
-/* LEFT column */
+/* --- Left Column (Matches Experience) --- */
 .ct-left {
   position: sticky;
-  top: 88px; /* sit under fixed navbar */
+  top: 100px; 
+  height: fit-content;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 14px;
-}
-.ct-photo {
-  width: 180px; height: 180px;
-  object-fit: cover;
-  border-radius: 50%;                 /* circular */
-  border: 1px solid var(--border);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.10);
-}
-.ct-keyword {
-  text-transform: uppercase;
-  letter-spacing: .14em;
-  font-size: 12px;
-  color: var(--muted);
-  border: 1px solid var(--border);
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: transparent;
+  align-items: center; 
+  text-align: center;
 }
 
-/* RIGHT column */
-.ct-title { font-size: 22px; margin: 0 0 12px; }
+.ct-hero-img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  border: 4px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+.ct-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--fg);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* --- Right Column (Form & Links) --- */
+.ct-right {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* 1. Contact Form Card */
+.ct-card {
+  background-color: var(--bg);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+
+.ct-card-title {
+  margin: 0 0 24px 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--fg);
+}
 
 .ct-form {
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: var(--bg);
-  padding: 14px;
-  box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 24px; /* Increased gap between form rows (e.g. Row 1 vs Subject) */
 }
 
-.ct-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.ct-full { display: block; margin-top: 12px; }
-.ct-form label { display: grid; gap: 6px; font-size: 13px; color: var(--muted); }
-.ct-form input, .ct-form textarea {
+.ct-row {
+  display: flex;       /* Changed from grid to flex */
+  gap: 24px;           /* Flex gap */
   width: 100%;
-  border: 1px solid var(--border);
-  background: transparent;
-  color: var(--fg);
-  padding: 10px 12px;
-  border-radius: 8px;
+}
+
+.ct-row > .ct-group {
+  flex: 1;             /* Each child takes equal width (50%) */
+  width: 100%;         /* Ensure they fill their flex basis */
+}
+
+/* Fallback for older browsers if 'gap' fails in Flex (rare now, but possible) */
+/* 
+.ct-row > .ct-group:first-child {
+  margin-right: 12px;
+}
+.ct-row > .ct-group:last-child {
+  margin-left: 12px;
+}
+*/
+
+.ct-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ct-group label {
   font-size: 14px;
+  font-weight: 500;
+  color: #666;
 }
-.ct-form input::placeholder, .ct-form textarea::placeholder { color: var(--muted); }
-.ct-actions { margin-top: 12px; display: flex; gap: 10px; }
 
-/* Buttons (use your global .btn/.btn-primary if you already have them) */
-.btn {
-  display: inline-flex; align-items: center; justify-content: center;
-  height: 36px; padding: 0 14px; border-radius: 8px;
-  font-size: 14px; text-decoration: none; cursor: pointer;
-  color: var(--fg); background: transparent; border: 1px solid var(--border);
+.ct-group input,
+.ct-group textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #f9f9f9; /* Slight contrast input bg */
+  font-size: 15px;
+  transition: all 0.2s;
+  color: var(--fg);
 }
-.btn:hover { background: rgba(127,127,127,0.08); }
-.btn-primary { color: var(--bg); background: var(--fg); border-color: var(--fg); }
-.theme-dark .btn-primary { color: #111; background: #ffd54a; border-color: #ffd54a; }
 
-/* Quick contact links */
+.ct-group input:focus,
+.ct-group textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.ct-submit-btn {
+  margin-top: 10px;
+  padding: 12px 24px;
+  background-color: #007bff;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+  align-self: flex-start; /* Left align button */
+}
+
+.ct-submit-btn:hover {
+  background-color: #0056b3;
+}
+
+/* 2. Quick Links Section */
+.ct-links-container {
+  padding-left: 10px; /* Slight offset */
+}
+
+.ct-links-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #444;
+}
+
 .ct-links {
   list-style: none;
-  padding: 0; margin: 14px 0 0;
-  display: grid; gap: 8px;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
 }
+
 .ct-links a {
-  display: inline-flex; align-items: center; gap: 8px;
-  color: var(--muted); text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-size: 16px;
+  color: #555;
+  font-weight: 500;
+  transition: color 0.2s;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background-color: #f5f5f5;
 }
-.ct-links a:hover { color: var(--fg); }
-.ct-links svg { fill: currentColor; }
+
+.ct-links a:hover {
+  color: #007bff;
+  background-color: #e6f0ff;
+}
 
 /* Responsive */
-@media (max-width: 980px) {
-  .ct-grid { grid-template-columns: 1fr; }
-  .ct-left { position: static; align-items: flex-start; }
-  .ct-row { grid-template-columns: 1fr; }
+@media (max-width: 768px) {
+  .ct-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .ct-left {
+    position: static;
+    margin-bottom: 20px;
+  }
+  
+  .ct-hero-img {
+    width: 140px;
+    height: 140px;
+  }
+
+  .ct-row {
+    flex-direction: column; /* Stack them */
+    gap: 20px;
+  }
+  
+  .ct-card {
+    padding: 20px;
+  }
 }

@@ -1,92 +1,210 @@
-/* Shell */
-.exp2 { padding: 32px 16px; background: var(--bg); color: var(--fg); }
-.exp2-grid {
-  max-width: 1120px;
+/* Container & Grid Setup */
+.exp-section {
+  padding: 60px 20px;
+  background-color: var(--bg);
+  color: var(--fg);
+}
+
+.exp-grid {
+  max-width: 1100px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 30% 70%;  /* requested ratio */
-  gap: 28px;
-  align-items: start;
+  /* LEFT (Title) takes ~30%, RIGHT (Content) takes rest */
+  grid-template-columns: 30% 1fr; 
+  gap: 40px;
 }
 
-/* LEFT column */
-.exp2-left {
+/* --- Left Column (Title & Image) --- */
+.exp-left {
   position: sticky;
-  top: 88px;                /* sit below your fixed navbar */
+  top: 100px; 
+  height: fit-content;
+  /* Centering Logic */
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 14px;
+  align-items: center; 
+  text-align: center;
 }
-.exp2-photo {
-  width: 180px;
+
+.exp-hero-img {
+  width: 180px;         /* Adjust size as needed */
   height: 180px;
   object-fit: cover;
-  border-radius: 50%;       /* circular */
-  border: 1px solid var(--border);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.10);
-}
-.exp2-keyword {
-  text-transform: uppercase;
-  letter-spacing: .14em;
-  font-size: 12px;
-  color: var(--muted);
-  border: 1px solid var(--border);
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: transparent;
+  border-radius: 50%;   /* Make it circular */
+  margin-bottom: 20px;
+  border: 4px solid rgba(0, 0, 0, 0.05); /* Optional subtle border */
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
 }
 
-/* RIGHT column timeline */
-.exp2-right { position: relative; }
-.exp2-timeline {
-  list-style: none;
+.exp-title {
+  font-size: 32px;
+  font-weight: 700;
   margin: 0;
-  padding: 0 0 0 22px;      /* space for line/dots */
-  position: relative;
-}
-.exp2-timeline::before {
-  content: "";
-  position: absolute;
-  left: 10px; top: 4px; bottom: 4px;
-  width: 2px;
-  background: var(--border);
-}
-.exp2-item {
-  position: relative;
-  margin: 0 0 18px;
-}
-.exp2-dot {
-  position: absolute;
-  left: 4px; top: 18px;
-  width: 12px; height: 12px;
-  border-radius: 50%;
-  background: var(--fg);
-  box-shadow: 0 0 0 3px var(--bg);
+  color: var(--fg);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-/* Cards */
-.exp2-card {
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: var(--bg);
-  padding: 14px 14px 10px;
-  box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+/* --- Right Column (List) --- */
+.exp-right {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-left: 0; 
 }
-.exp2-head { margin-bottom: 6px; }
-.exp2-role { font-size: 16px; margin: 0 0 4px; }
-.exp2-meta { color: var(--muted); font-size: 13px; display: flex; gap: 8px; flex-wrap: wrap; }
-.exp2-company { font-weight: 600; color: var(--fg); }
-.exp2-sep { opacity: .6; }
+
+/* Individual Item Styling - CARD STYLE with Left Border Accent */
+.exp-item {
+  background-color: var(--bg);
+  /* Use a lighter border for top/right/bottom */
+  border: 1px solid rgba(0, 0, 0, 0.08); 
+  
+  /* KEY CHANGE: The "Straight Line" is now a thick Left Border */
+  border-left: 4px solid #e0e0e0; /* Default Grey Line */
+  
+  border-radius: 4px 12px 12px 4px; /* Sharper corners on left where line is */
+  padding: 24px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+}
+
+/* First Item (Current Experience) - Green Accent */
+.exp-item:first-child {
+  border-left-color: #28a745; /* Green */
+  background-color: #f0fdf4;  /* Optional: Very subtle green tint */
+}
+
+/* Hover Effect */
+.exp-item:hover {
+  transform: translateX(6px); /* Slide slightly right */
+  border-left-color: #007bff; /* Color the line on hover */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* Optional: If you want the first item to STAY green even on hover */
+.exp-item:first-child:hover {
+  border-left-color: #28a745; 
+}
+
+.exp-header {
+  display: flex;
+  justify-content: space-between; 
+  align-items: flex-start;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.exp-main {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.exp-logo {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid #eee;
+  padding: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.exp-role {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+  color: var(--fg);
+}
+
+.exp-company {
+  font-size: 15px;
+  color: #555; 
+  font-weight: 500;
+}
+
+/* Meta Data (Date/Location) */
+.exp-meta {
+  text-align: right;
+  font-size: 14px;
+  color: #777;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.exp-period {
+  font-weight: 600;
+  margin-bottom: 2px;
+  color: #444;
+}
 
 /* Bullets */
-.exp2-list { margin: 8px 0 2px 18px; }
-.exp2-list li { margin: 4px 0; line-height: 1.55; }
-
-/* Responsive */
-@media (max-width: 980px) {
-  .exp2-grid { grid-template-columns: 1fr; }
-  .exp2-left { position: static; align-items: flex-start; }
-  .exp2-photo { width: 140px; height: 140px; }
-  .hide-sm { display: none; }
+.exp-bullets {
+  margin: 12px 0 0 68px; /* Align content properly */
+  padding: 0;
+  list-style: none; /* Remove default bullets */
 }
+
+.exp-bullets li {
+  position: relative;
+  padding-left: 18px;
+  margin-bottom: 8px;
+  color: #444;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* Custom bullet dot */
+.exp-bullets li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #666;
+  font-weight: bold;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .exp-grid {
+    grid-template-columns: 1fr; 
+    gap: 30px;
+  }
+
+  .exp-left {
+    position: static;
+    margin-bottom: 30px;
+  }
+
+  .exp-hero-img {
+    width: 140px;
+    height: 140px;
+  }
+
+  .exp-header {
+    flex-direction: column; 
+    align-items: flex-start;
+  }
+
+  .exp-meta {
+    text-align: left;
+    align-items: flex-start;
+    margin-top: 8px;
+    margin-left: 68px; 
+  }
+
+  .exp-bullets {
+    margin-left: 20px; 
+  }
+  
+  .exp-item {
+    padding: 20px;
+  }
+
+  .exp-right {
+    padding-left: 0; 
+  }
+}
+
