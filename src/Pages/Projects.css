@@ -1,0 +1,92 @@
+/* Shell & grid */
+.prj { padding: 32px 16px; background: var(--bg); color: var(--fg); }
+.prj-grid {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 30% 70%;
+  gap: 28px;
+  align-items: start;
+}
+
+/* Left column */
+.prj-left {
+  position: sticky;
+  top: 88px; /* under fixed navbar */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.prj-photo {
+  width: 180px; height: 180px;
+  object-fit: cover;
+  border-radius: 50%;      /* circular */
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.10);
+}
+.prj-keyword {
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  font-size: 12px;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: transparent;
+}
+
+/* Right column */
+.prj-title { font-size: 22px; margin: 0 0 12px; }
+
+/* Cards grid: responsive 2-up if space allows */
+.prj-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+@media (min-width: 860px) {
+  .prj-cards { grid-template-columns: 1fr 1fr; }
+}
+
+/* Card */
+.prj-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
+  padding: 14px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.prj-name { font-size: 16px; margin: 0; }
+.prj-blurb { margin: 0; line-height: 1.6; color: var(--fg); }
+
+/* Tags */
+.prj-tags {
+  display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 2px 0 0; padding: 0;
+}
+.prj-tags li {
+  font-size: 12px; color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 4px 8px;
+  background: transparent;
+}
+
+/* Links */
+.prj-links { margin-top: 4px; display: flex; flex-wrap: wrap; gap: 8px; }
+.btn.btn-sm {
+  height: 32px; padding: 0 12px; font-size: 13px;
+  border: 1px solid var(--border); border-radius: 8px;
+  color: var(--fg); background: transparent; text-decoration: none;
+}
+.btn.btn-sm:hover { background: rgba(127,127,127,0.08); }
+
+/* Responsive */
+@media (max-width: 980px) {
+  .prj-grid { grid-template-columns: 1fr; }
+  .prj-left { position: static; align-items: flex-start; }
+  .prj-photo { width: 140px; height: 140px; }
+}
