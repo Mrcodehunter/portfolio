@@ -2,30 +2,31 @@ import "./Publications.css";
 
 const PUBLICATIONS = [
   {
-    title: "Title of Your Paper",
-    authors: "Your Name, Coauthor A, Coauthor B",
-    venue: "Conference / Journal Name",
-    year: 2025,
+    title: "Classification of Social Media Users Based on Temporal Behaviors and Interests",
+    authors: "Murad Hossen, Tamanna Afrose, Atashi Mani Ghosh, Md. Musfique Anwar",
+    venue: "Communication and Intelligent Systems (Lecture Notes in Networks and Systems, vol 204)",
+    year: 2021,
     blurb:
-      "One-line summary of what this work contributes or explores.",
+      "Proposed a temporal modeling approach to track and classify users' topical interests over time using a fading time-window on social activity streams. Experiments on real Twitter data demonstrated that users within the same category exhibit similar temporal patterns in the evolution of their interests.",
     links: [
-      { label: "PDF", href: "#", external: true },
-      { label: "DOI", href: "#", external: true },
-      { label: "Code", href: "#", external: true },
+      { label: "PDF", href: "https://link.springer.com/chapter/10.1007/978-981-16-1089-9_72", external: true },
+      { label: "DOI", href: "https://doi.org/10.1007/978-981-16-1089-9_72", external: true },
     ],
-    tags: ["Systems", "Automation"],
+    tags: ["Machine Learning", "Social Media", "Temporal Modeling"],
   },
   {
-    title: "Another Publication Title",
-    authors: "Your Name, Someone Else",
-    venue: "Workshop @ BigConf",
-    year: 2024,
+    title: "Heart Diseases Prediction Using Multiple Machine Learning Techniques",
+    authors: "Tamanna Afrose, Murad Hossen, Md. Imdadul Islam",
+    venue: "2022 4th International Conference on Sustainable Technologies for Industry 4.0 (STI)",
+    year: 2022,
     blurb:
-      "Short description (optional).",
-    links: [{ label: "PDF", href: "#", external: true }],
-    tags: ["Observability"],
+      "Developed a heart disease prediction model based on ten clinical parameters using multiple machine learning techniques, including K-means, FCM, SVM, FIS, LR, MLR, and Neural Networks. Combined hybrid models achieved improved performance, attaining over 94% detection accuracy for the combination of FCM, K-means, SVM, MLR, FIS, and NN.",
+    links: [
+      { label: "PDF", href: "https://ieeexplore.ieee.org/document/10103237", external: true },
+      { label: "DOI", href: "https://doi.org/10.1109/STI56238.2022.10103237", external: true },
+    ],
+    tags: ["Machine Learning", "Healthcare", "Classification"],
   },
-  // Add more...
 ];
 
 export default function Publications() {
@@ -33,69 +34,70 @@ export default function Publications() {
   const pubs = [...PUBLICATIONS].sort((a, b) => (b.year || 0) - (a.year || 0));
 
   return (
-    <section id="publications" className="pub">
+    <section id="publications" className="pub-section">
       <div className="pub-grid">
-        {/* LEFT: circular image + keyword */}
-        <aside className="pub-left">
-          <img className="pub-photo" src="/avatar.jpg" alt="Profile" /> {/* replace path or import */}
-          <div className="pub-keyword">Publications</div>
-        </aside>
+        {/* LEFT: Image + Title Centered */}
+        <div className="pub-left">
+          <img 
+            className="pub-hero-img" 
+            src="/avatar.jpg" 
+            alt="Publications" 
+          />
+          <h1 className="pub-title">Publications</h1>
+        </div>
 
-        {/* RIGHT: publication list */}
+        {/* RIGHT: Publication List */}
         <div className="pub-right">
-          <h2 className="pub-title">Selected Publications</h2>
 
           {pubs.length === 0 ? (
             <p className="pub-empty">No publications added yet.</p>
           ) : (
-            <ol className="pub-list">
+            <div className="pub-list">
               {pubs.map((p, i) => (
-                <li className="pub-item" key={i}>
-                  <article className="pub-card">
-                    <header className="pub-head">
-                      <h3 className="pub-name">{p.title}</h3>
-                      <div className="pub-meta">
-                        <span className="pub-authors">{p.authors}</span>
-                        <span className="pub-sep">•</span>
-                        <span className="pub-venue">{p.venue}</span>
-                        {p.year && (
-                          <>
-                            <span className="pub-sep">•</span>
-                            <span className="pub-year">{p.year}</span>
-                          </>
-                        )}
-                      </div>
-                    </header>
+                <article className="pub-card" key={i}>
+                  <header className="pub-head">
+                    <h3 className="pub-name">{p.title}</h3>
+                    <div className="pub-meta">
+                      <span className="pub-authors">{p.authors}</span>
+                      <span className="pub-sep">•</span>
+                      <span className="pub-venue">{p.venue}</span>
+                      {p.year && (
+                        <>
+                          <span className="pub-sep">•</span>
+                          <span className="pub-year">{p.year}</span>
+                        </>
+                      )}
+                    </div>
+                  </header>
 
-                    {p.blurb && <p className="pub-blurb">{p.blurb}</p>}
+                  {p.blurb && <p className="pub-blurb">{p.blurb}</p>}
 
-                    {(p.tags?.length ?? 0) > 0 && (
-                      <ul className="pub-tags">
-                        {p.tags.map((t, idx) => (
-                          <li key={idx}>{t}</li>
-                        ))}
-                      </ul>
-                    )}
+                  {(p.tags?.length ?? 0) > 0 && (
+                    <ul className="pub-tags">
+                      {p.tags.map((t, idx) => (
+                        <li key={idx}>{t}</li>
+                      ))}
+                    </ul>
+                  )}
 
-                    {(p.links?.length ?? 0) > 0 && (
-                      <div className="pub-links">
-                        {p.links.map((l, idx) => (
-                          <a
-                            key={idx}
-                            href={l.href}
-                            target={l.external ? "_blank" : undefined}
-                            rel={l.external ? "noopener noreferrer" : undefined}
-                            className="btn btn-sm"
-                          >
-                            {l.label}
-                          </a>
-                        ))}
-                      </div>
-                    )}
-                  </article>
-                </li>
+                  {(p.links?.length ?? 0) > 0 && (
+                    <div className="pub-links">
+                      {p.links.map((l, idx) => (
+                        <a
+                          key={idx}
+                          href={l.href}
+                          target={l.external ? "_blank" : undefined}
+                          rel={l.external ? "noopener noreferrer" : undefined}
+                          className="pub-link-btn"
+                        >
+                          {l.label}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </article>
               ))}
-            </ol>
+            </div>
           )}
         </div>
       </div>

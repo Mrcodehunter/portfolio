@@ -56,43 +56,40 @@
 /* Individual Item Styling - CARD STYLE with Left Border Accent */
 .exp-item {
   background-color: var(--bg);
-  /* Use a lighter border for top/right/bottom */
   border: 1px solid rgba(0, 0, 0, 0.08); 
-  
-  /* KEY CHANGE: The "Straight Line" is now a thick Left Border */
-  border-left: 4px solid #e0e0e0; /* Default Grey Line */
-  
-  border-radius: 4px 12px 12px 4px; /* Sharper corners on left where line is */
-  padding: 24px;
+  border-left: 4px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 24px 24px 24px 20px;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-/* First Item (Current Experience) - Green Accent */
+/* First Item (Current Experience) - Blue Accent */
 .exp-item:first-child {
-  border-left-color: #28a745; /* Green */
-  background-color: #f0fdf4;  /* Optional: Very subtle green tint */
+  border-left-color: #007bff;
+  background-color: #f8f9fa;
 }
 
 /* Hover Effect */
 .exp-item:hover {
-  transform: translateX(6px); /* Slide slightly right */
-  border-left-color: #007bff; /* Color the line on hover */
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+  border-left-color: #0056b3;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Optional: If you want the first item to STAY green even on hover */
 .exp-item:first-child:hover {
-  border-left-color: #28a745; 
+  border-left-color: #0056b3;
 }
 
 .exp-header {
   display: flex;
   justify-content: space-between; 
   align-items: flex-start;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .exp-main {
@@ -113,15 +110,15 @@
 }
 
 .exp-role {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
-  margin: 0 0 4px 0;
+  margin: 0 0 6px 0;
   color: var(--fg);
 }
 
 .exp-company {
-  font-size: 15px;
-  color: #555; 
+  font-size: 16px;
+  color: #666; 
   font-weight: 500;
 }
 
@@ -143,27 +140,28 @@
 
 /* Bullets */
 .exp-bullets {
-  margin: 12px 0 0 68px; /* Align content properly */
+  margin: 12px 0 0 0;
   padding: 0;
-  list-style: none; /* Remove default bullets */
+  list-style: none;
 }
 
 .exp-bullets li {
   position: relative;
-  padding-left: 18px;
-  margin-bottom: 8px;
+  padding-left: 20px;
+  margin-bottom: 10px;
   color: #444;
   font-size: 15px;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 /* Custom bullet dot */
 .exp-bullets li::before {
-  content: "•";
+  content: "▸";
   position: absolute;
   left: 0;
-  color: #666;
+  color: #007bff;
   font-weight: bold;
+  font-size: 14px;
 }
 
 /* Mobile Responsive */
@@ -192,11 +190,11 @@
     text-align: left;
     align-items: flex-start;
     margin-top: 8px;
-    margin-left: 68px; 
+    margin-left: 0; 
   }
 
   .exp-bullets {
-    margin-left: 20px; 
+    margin-left: 0; 
   }
   
   .exp-item {
