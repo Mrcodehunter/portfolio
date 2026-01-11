@@ -7,7 +7,7 @@ const NAV_ITEMS = [
   { label: "Achievements", href: "#achievements" },
   { label: "Projects", href: "#projects" },
   { label: "Publications", href: "#publications" },
-  { label: "Posts", href: "#posts" },
+  // { label: "Posts", href: "#posts" },
   { label: "CV", href: "/CV.pdf", external: true },
   { label: "Contact", href: "#contact" },
 ];

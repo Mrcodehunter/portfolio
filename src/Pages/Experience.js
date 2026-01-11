@@ -3,43 +3,39 @@ import "./Experience.css";
 // Re-import the experience image
 import experienceImage from "./../Assets/workexperience.png"; 
 
-// Placeholder for logos. ideally you import these from your Assets folder
-// import cefaloLogo from "../Assets/cefalo.png";
-const DEFAULT_LOGO = "https://via.placeholder.com/60"; 
-
 const EXPERIENCES = [
   {
-    role: "Software Engineer",
-    company: "Cefalo Bangladesh",
-    logo: DEFAULT_LOGO, 
-    period: "Mar 2022 — Oct 2025",
+    role: "Software Engineer Consultant (KPMG Technology Service)",
+    company: "Cefalo Bangladesh Ltd.",
+    period: "Aug 2022 — Present",
     location: "Dhaka, BD",
     bullets: [
-      "Built nTAAP—an Azure App Services–based automation platform...",
-      "Designed event-driven microservices with Service Bus and Redis...",
-      "Implemented RBAC-based AuthN/AuthZ integrating Entra ID...",
-    ],
+      "Built nTAAP - an Azure App Services-based automation platform that orchestrates robust workflows, cutting over 95% of manual, repetitive work and significantly accelerating service delivery",
+      "Architected an event-driven microservices system using Azure Service Bus and Redis for decoupled communication and high performance",
+      "Designed and integrated a Cosmos Graph DB solution, developing a custom adapter and complex Gremlin queries to enable efficient querying of dynamic data relationships",
+      "Architected a full-stack RBAC framework, integrating Azure Entra ID with a custom database to enforce granular authentication and authorization",
+      "Led the test automation strategy by designing unit tests with xUnit, achieving more than 90% line and branch coverage, and architecting the end-to-end test process",
+      "Orchestrated the Azure App Service operational backbone, managing identity, secrets, performance, and logging through integrated services including Entra ID, Key Vault, Application Insights, and Log Analytics",
+      ],
   },
   {
-    role: "Consultant (Cloud)",
-    company: "KPMG (Nordic Technology Service)",
-    logo: DEFAULT_LOGO,
-    period: "Aug 2022 — Oct 2025",
-    location: "Remote",
+    role: "Trainee Software Engineer",
+    company: "Cefalo Bangladesh Ltd.",
+    period: "Mar 2022 — Aug 2022",
+    location: "Dhaka, BD",
     bullets: [
-      "Advised on automation strategy, platform reliability...",
-      "Hardened APIs (rate limits, JWT/OIDC, CORS)...",
+      "Developed TechTalk, a full-stack blogging platform with React frontend and RESTful APIs using .NET/Node.js, implementing secure authentication middleware for user verification and resource management",
+      "Accelerated proficiency in various technologies through hands-on development and mentorship from specialized trainers",
     ],
   },
   {
     role: "Teaching Assistant",
     company: "Jahangirnagar University — CSE",
-    logo: DEFAULT_LOGO,
     period: "Sep 2020 — Aug 2022",
     location: "Savar, BD",
     bullets: [
-      "Led training on C/C++, Data Structures, and Algorithms.",
-      "Organized practice contests and analyzed performance metrics...",
+      "Led specialized technical training programs focused on C, C++, Data Structures, and Algorithms to build a strong competitive programming posture for the institution, accumulating 200+ trainees over two years",
+      "Managed the training lifecycle by coordinating sessions, designing practice contests, and analyzing performance metrics to ensure continuous skill development",
     ],
   },
 ];
@@ -63,13 +59,8 @@ export default function Experience() {
           {EXPERIENCES.map((job, i) => (
             <div className="exp-item" key={i}>
               <div className="exp-header">
-                {/* Logo + Role/Company Group */}
+                {/* Role/Company Group */}
                 <div className="exp-main">
-                  <img 
-                    src={job.logo} 
-                    alt={`${job.company} logo`} 
-                    className="exp-logo" 
-                  />
                   <div>
                     <h3 className="exp-role">{job.role}</h3>
                     <div className="exp-company">{job.company}</div>

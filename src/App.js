@@ -21,7 +21,7 @@ function LandingSections() {
       <section id="publications"><Publications /></section>
 
       {/* ⬇️ show the 2-card preview here */}
-      <section id="posts"><PostsPreview /></section>
+      {/* <section id="posts"><PostsPreview /></section> */}
 
       <section id="contact"><Contact /></section>
     </main>

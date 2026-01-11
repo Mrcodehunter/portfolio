@@ -3,56 +3,47 @@ import "./Projects.css";
 const PROJECTS = [
   {
     title: "nTAAP – Cloud Automation Platform",
-    blurb:
-      "Azure App Services–driven automation with robust workflows to cut manual toil and speed up delivery.",
-    tech: ["Azure", "App Service", "Service Bus", "Redis", "RBAC"],
-    links: [
-      { label: "Case Study", href: "#" },
-      { label: "Code", href: "#", external: true },
-    ],
+    description:
+      "Built an Azure App Services–based automation platform that orchestrates robust workflows, cutting over 95% of manual, repetitive work and significantly accelerating service delivery. Architected an event-driven microservices system using Azure Service Bus and Redis for decoupled communication and high performance. Designed and integrated a Cosmos Graph DB solution, developing a custom adapter and complex Gremlin queries to enable efficient querying of dynamic data relationships. Architected a full-stack RBAC framework, integrating Azure Entra ID with a custom database to enforce granular authentication and authorization.",
+    tech: ["Azure App Service", "Azure Service Bus", "Redis", "Cosmos DB", "Azure Entra ID", "RBAC", "Gremlin", "xUnit"],
+    links: [],
   },
   {
-    title: "TechTalk – Blogging Platform",
-    blurb:
-      "Full-stack blog with auth, editor, and REST APIs; built for fast iteration and clean DX.",
-    tech: ["React", ".NET", "Node.js", "PostgreSQL"],
+    title: "TechTalk – Full-Stack Blogging Platform",
+    description:
+      "Developed a full-stack blogging platform with React frontend and RESTful APIs using .NET/Node.js, implementing secure authentication middleware for user verification and resource management. Built for fast iteration and clean developer experience with comprehensive features including rich text editor, user management, and content organization.",
+    tech: ["React", ".NET", "Node.js", "REST API", "Authentication", "PostgreSQL"],
     links: [
-      { label: "Live", href: "#" },
       { label: "Frontend", href: "https://github.com/Mrcodehunter/tech-talk", external: true },
       { label: "API", href: "https://github.com/Mrcodehunter/Cefalo.TechTalk.Api", external: true },
     ],
-  },
-  {
-    title: "Observability Starter",
-    blurb:
-      "Reusable tracing/metrics/audit starter wired into pipelines for reliable releases.",
-    tech: ["OpenTelemetry", "App Insights", "Azure DevOps"],
-    links: [{ label: "Docs", href: "#" }],
   },
 ];
 
 export default function Projects() {
   return (
-    <section id="projects" className="prj">
+    <section id="projects" className="prj-section">
       <div className="prj-grid">
-        {/* LEFT: circular image + keyword */}
-        <aside className="prj-left">
-          <img className="prj-photo" src="/avatar.jpg" alt="Profile" />
-          <div className="prj-keyword">Projects</div>
-        </aside>
+        {/* LEFT: Image + Title Centered */}
+        <div className="prj-left">
+          <img 
+            className="prj-hero-img" 
+            src="/avatar.jpg" 
+            alt="Projects" 
+          />
+          <h1 className="prj-title">Projects</h1>
+        </div>
 
-        {/* RIGHT: cards */}
+        {/* RIGHT: Project List */}
         <div className="prj-right">
-          <h2 className="prj-title">Selected Projects</h2>
-
-          <div className="prj-cards">
+          <div className="prj-list">
             {PROJECTS.map((p, i) => (
               <article className="prj-card" key={i}>
                 <header className="prj-head">
                   <h3 className="prj-name">{p.title}</h3>
                 </header>
 
-                <p className="prj-blurb">{p.blurb}</p>
+                <p className="prj-description">{p.description}</p>
 
                 {p.tech?.length > 0 && (
                   <ul className="prj-tags">
@@ -70,7 +61,7 @@ export default function Projects() {
                         href={l.href}
                         target={l.external ? "_blank" : undefined}
                         rel={l.external ? "noopener noreferrer" : undefined}
-                        className="btn btn-sm"
+                        className="prj-link-btn"
                       >
                         {l.label}
                       </a>
