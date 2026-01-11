@@ -1,46 +1,84 @@
+import { useEffect, useRef } from "react";
 import "./Home.css";
 import profileImage from "./../Assets/profile.jpg"
 
 export default function Home() {
+  const sectionRef = useRef(null);
+  const imageRef = useRef(null);
+
+  useEffect(() => {
+    let rafId = null;
+    let currentTranslateY = 0;
+    let isAnimating = false;
+
+    const updateImagePosition = () => {
+      if (sectionRef.current && imageRef.current) {
+        const section = sectionRef.current;
+        const rect = section.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        const sectionHeight = section.offsetHeight;
+        const imageHeight = imageRef.current.offsetHeight;
+        const stickyTop = 100; // Matches CSS top: 100px
+        
+        // Calculate scroll progress more accurately
+        const totalDistance = sectionHeight + windowHeight;
+        const scrolledDistance = windowHeight - rect.top;
+        const scrollProgress = Math.max(0, Math.min(1, scrolledDistance / totalDistance));
+        
+        // Calculate maximum downward movement
+        const maxMovement = Math.max(0, sectionHeight - stickyTop - imageHeight - 40);
+        
+        // Target position based on scroll
+        const targetTranslateY = scrollProgress * maxMovement;
+        
+        // Smooth interpolation for smoother movement
+        const diff = targetTranslateY - currentTranslateY;
+        if (Math.abs(diff) > 0.1) {
+          currentTranslateY += diff * 0.15; // Smooth easing factor
+          isAnimating = true;
+          
+          // Store translateY in CSS variable for hover effect
+          imageRef.current.style.setProperty('--scroll-y', `${currentTranslateY}px`);
+          imageRef.current.style.transform = `translateY(${currentTranslateY}px)`;
+          
+          rafId = requestAnimationFrame(updateImagePosition);
+        } else {
+          // Close enough, set final value
+          currentTranslateY = targetTranslateY;
+          imageRef.current.style.setProperty('--scroll-y', `${currentTranslateY}px`);
+          imageRef.current.style.transform = `translateY(${currentTranslateY}px)`;
+          isAnimating = false;
+          rafId = null;
+        }
+      }
+    };
+
+    const handleScroll = () => {
+      if (!isAnimating) {
+        rafId = requestAnimationFrame(updateImagePosition);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    updateImagePosition(); // Initial call
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+      }
+    };
+  }, []);
+
   return (
-    <section id="home" className="home">
+    <section id="home" className="home-section" ref={sectionRef}>
       <div className="home-grid">
-        <aside className="profile">
-          <img
-            className="profile-photo"
-            src={profileImage}
-            alt="Your Name portrait"
-          />
-
-          <div className="profile-meta">
-            <h1 className="profile-name">Murad Hossen</h1>
-            <div className="profile-role">Software Engineer</div>
-            <div className="profile-company">Cefalo Bangladesh Ltd.</div>
-          </div>
-
-          <nav className="profile-icons" aria-label="Profile links">
-            <a className="icon-btn" href="mailto:muradhossen.official2016@gmail.com" aria-label="Email" title="Email">
-              <svg viewBox="0 0 24 24" width="18" height="18"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2
-              2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5L4 8V6l8 5 8-5Z"/></svg>
-            </a>
-            <a className="icon-btn" href="https://scholar.google.com/citations?user=BT3a-6QAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar" title="Google Scholar">
-              <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 3 1 8l11 5 9-4.09V17h2V8L12 3Zm-1 13.5-7-3.18V18c0 .83.67 1.5 1.5 1.5H17v-2H6.91c-.51 0-.91-.4-.91-.9v-2.28l5 2.27c.62.28 1.38.28 2 0Z"/></svg>
-            </a>
-            <a className="icon-btn" href="https://github.com/Mrcodehunter" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub">
-              <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 .5A12 12 0 0 0 0 12.8c0 5.4 3.4 10 8.2 11.6.6.1.8-.3.8-.6v-2c-3.3.8-4-1.4-4-1.4-.6-1.4-1.5-1.8-1.5-1.8-1.2-.8.1-.8.1-.8 1.3.1 2 1.4 2 1.4 1.2 2 3.1 1.4 3.8 1 .1-.9.5-1.4.9-1.7-2.7-.3-5.5-1.4-5.5-6.2 0-1.4.5-2.6 1.3-3.5-.1-.3-.6-1.8.1-3.7 0 0 1-.3 3.6 1.3 1-.3 2-.4 3-.4s2 .1 3 .4c2.6-1.6 3.6-1.3 3.6-1.3.7 1.9.3 3.4.1 3.7.8.9 1.3 2.1 1.3 3.5 0 4.9-2.8 5.9-5.5 6.2.5.4 1 1.2 1 2.4v3.5c0 .3.2.7.8.6A12.3 12.3 0 0 0 24 12.8 12 12 0 0 0 12 .5Z"/></svg>
-            </a>
-            <a className="icon-btn" href="https://www.linkedin.com/in/codehunter/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn">
-              <svg viewBox="0 0 24 24" width="18" height="18"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.44-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.44v6.3zM5.34 7.44c-1.14 0-2.07-.93-2.07-2.08 0-1.15.93-2.08 2.07-2.08 1.15 0 2.08.93 2.08 2.08 0 1.15-.93 2.08-2.08 2.08zM7.11 20.45H3.58V9h3.53v11.45z"/></svg>
-            </a>
-            <a className="icon-btn" href="/cv.pdf" target="_blank" rel="noopener noreferrer" aria-label="CV" title="CV">
-              <svg viewBox="0 0 24 24" width="18" height="18"><path d="M14 2H6a2 2 0 0 0-2 2v16a2
-              2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Zm0 2 4 4h-4zM8 12h8v2H8zm0 4h8v2H8z"/></svg>
-            </a>
-          </nav>
-        </aside>
-
-        {/* Right: Biography */}
-        <article className="bio">
+        {/* LEFT: Content (Biography) */}
+        <article className="home-content">
+          <h1 className="home-name">Murad Hossen</h1>
+          <div className="home-role">Software Engineer</div>
+          <div className="home-company">Cefalo Bangladesh Ltd.</div>
+          
           <h2 className="bio-title">Biography</h2>
           <p>
             Murad Hossen is a Software Engineer at Cefalo Bangladesh Ltd., specializing in building robust, scalable web and cloud applications. He worked for Cefalo on KPMG's automation project as a consultant, focusing on Azure-centric automation and integration projects.
@@ -54,7 +92,37 @@ export default function Home() {
           <p>
             Passionate about continuous learning and AI-driven system design, Murad aspires to progress into higher-impact roles where he can own complex systems and contribute to scalable, user-centered products.
           </p>
+
+          <nav className="home-icons" aria-label="Profile links">
+            <a className="icon-btn" href="mailto:muradhossen.official2016@gmail.com" aria-label="Email" title="Email">
+              <svg viewBox="0 0 24 24" width="18" height="18"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2
+              2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5L4 8V6l8 5 8-5Z"/></svg>
+            </a>
+            <a className="icon-btn" href="https://scholar.google.com/citations?user=BT3a-6QAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar" title="Google Scholar">
+              <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 3 1 8l11 5 9-4.09V17h2V8L12 3Zm-1 13.5-7-3.18V18c0 .83.67 1.5 1.5 1.5H17v-2H6.91c-.51 0-.91-.4-.91-.9v-2.28l5 2.27c.62.28 1.38.28 2 0Z"/></svg>
+            </a>
+            <a className="icon-btn" href="https://github.com/Mrcodehunter" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub">
+              <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 .5A12 12 0 0 0 0 12.8c0 5.4 3.4 10 8.2 11.6.6.1.8-.3.8-.6v-2c-3.3.8-4-1.4-4-1.4-.6-1.4-1.5-1.8-1.5-1.8-1.2-.8.1-.8.1-.8 1.3.1 2 1.4 2 1.4 1.2 2 3.1 1.4 3.8 1 .1-.9.5-1.4.9-1.7-2.7-.3-5.5-1.4-5.5-6.2 0-1.4.5-2.6 1.3-3.5-.1-.3-.6-1.8.1-3.7 0 0 1-.3 3.6 1.3 1-.3 2-.4 3-.4s2 .1 3 .4c2.6-1.6 3.6-1.3 3.6-1.3.7 1.9.3 3.4.1 3.7.8.9 1.3 2.1 1.3 3.5 0 4.9-2.8 5.9-5.5 6.2.5.4 1 1.2 1 2.4v3.5c0 .3.2.7.8.6A12.3 12.3 0 0 0 24 12.8 12 12 0 0 0 12 .5Z"/></svg>
+            </a>
+            <a className="icon-btn" href="https://www.linkedin.com/in/codehunter/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn">
+              <svg viewBox="0 0 24 24" width="18" height="18"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.44-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.44v6.3zM5.34 7.44c-1.14 0-2.07-.93-2.07-2.08 0-1.15.93-2.08 2.07-2.08 1.15 0 2.08.93 2.08 2.08 0 1.15-.93 2.08-2.08 2.08zM7.11 20.45H3.58V9h3.53v11.45z"/></svg>
+            </a>
+            <a className="icon-btn" href="/CV.pdf" target="_blank" rel="noopener noreferrer" aria-label="CV" title="CV">
+              <svg viewBox="0 0 24 24" width="18" height="18"><path d="M14 2H6a2 2 0 0 0-2 2v16a2
+              2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Zm0 2 4 4h-4zM8 12h8v2H8zm0 4h8v2H8z"/></svg>
+            </a>
+          </nav>
         </article>
+
+        {/* RIGHT: Image */}
+        <aside className="home-image">
+          <img
+            ref={imageRef}
+            className="home-hero-img"
+            src={profileImage}
+            alt="Murad Hossen"
+          />
+        </aside>
       </div>
     </section>
   );
