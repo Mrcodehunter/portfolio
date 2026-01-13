@@ -1,7 +1,5 @@
-import React from "react";
-import "./Experience.css";
-// Re-import the experience image
-import experienceImage from "./../Assets/workexperience.png"; 
+import React, { useEffect, useRef, useState } from "react";
+import "./Experience.css"; 
 
 const EXPERIENCES = [
   {
@@ -41,23 +39,39 @@ const EXPERIENCES = [
 ];
 
 export default function Experience() {
-  return (
-    <section id="experience" className="exp-section">
-      <div className="exp-grid">
-        {/* LEFT COLUMN: Image + Title Centered */}
-        <div className="exp-left">
-          <img 
-            src={experienceImage} 
-            alt="Experience" 
-            className="exp-hero-img"
-          />
-          <h1 className="exp-title">Experience</h1>
-        </div>
+  const [visible, setVisible] = useState(false);
+  const sectionRef = useRef(null);
 
-        {/* RIGHT COLUMN: Experience List */}
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisible(true);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
+  return (
+    <section id="experience" className="exp-section" ref={sectionRef}>
+      <div className="exp-grid">
+        <h1 className="exp-title">Experience</h1>
         <div className="exp-right">
           {EXPERIENCES.map((job, i) => (
-            <div className="exp-item" key={i}>
+            <div className={`exp-item ${visible ? 'exp-item-visible' : ''}`} key={i} style={{ animationDelay: `${i * 0.2}s` }}>
               <div className="exp-header">
                 {/* Role/Company Group */}
                 <div className="exp-main">

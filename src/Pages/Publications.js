@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import "./Publications.css";
 
 const PUBLICATIONS = [
@@ -30,23 +31,39 @@ const PUBLICATIONS = [
 ];
 
 export default function Publications() {
+  const [visible, setVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisible(true);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   // Sort newest first
   const pubs = [...PUBLICATIONS].sort((a, b) => (b.year || 0) - (a.year || 0));
 
   return (
-    <section id="publications" className="pub-section">
+    <section id="publications" className="pub-section" ref={sectionRef}>
+      <h1 className="pub-title">Publications</h1>
       <div className="pub-grid">
-        {/* LEFT: Image + Title Centered */}
-        <div className="pub-left">
-          <img 
-            className="pub-hero-img" 
-            src="/avatar.jpg" 
-            alt="Publications" 
-          />
-          <h1 className="pub-title">Publications</h1>
-        </div>
-
-        {/* RIGHT: Publication List */}
         <div className="pub-right">
 
           {pubs.length === 0 ? (
@@ -54,7 +71,7 @@ export default function Publications() {
           ) : (
             <div className="pub-list">
               {pubs.map((p, i) => (
-                <article className="pub-card" key={i}>
+                <article className={`pub-card ${visible ? 'pub-card-visible' : ''}`} key={i} style={{ animationDelay: `${i * 0.2}s` }}>
                   <header className="pub-head">
                     <h3 className="pub-name">{p.title}</h3>
                     <div className="pub-meta">

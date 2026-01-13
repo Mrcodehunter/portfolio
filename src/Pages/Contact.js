@@ -3,21 +3,10 @@ import "./Contact.css";
 export default function Contact() {
   return (
     <section id="contact" className="ct-section">
+      <h1 className="ct-title">Contact</h1>
       <div className="ct-grid">
-        {/* LEFT: Image + Title Centered */}
-        <div className="ct-left">
-          <img 
-            className="ct-hero-img" 
-            src="/avatar.jpg" 
-            alt="Contact" 
-          />
-          <h1 className="ct-title">Contact</h1>
-        </div>
-
-        {/* RIGHT: Contact Links */}
         <div className="ct-right">
           <div className="ct-links-container">
-            <h2 className="ct-links-title">Get in Touch</h2>
             <ul className="ct-links">
               <li>
                 <span className="ct-icon">{MailIcon()}</span>

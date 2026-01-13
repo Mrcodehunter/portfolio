@@ -17,7 +17,13 @@ export default function Navbar() {
   const [active, setActive] = useState("#home");
   const [query, setQuery] = useState("");
   const clearTimer = useRef(null);
-  const [theme, setTheme] = useState(() => localStorage.getItem("theme-mode") || "light");
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = localStorage.getItem("theme-mode");
+    const initialTheme = savedTheme || "dark";
+    // Apply theme immediately on initial load
+    document.documentElement.classList.toggle("theme-dark", initialTheme === "dark");
+    return initialTheme;
+  });
 
   useEffect(() => {
     document.documentElement.classList.toggle("theme-dark", theme === "dark");
@@ -39,12 +45,6 @@ export default function Navbar() {
     return () => document.removeEventListener("click", handler);
   }, []);
 
-  // Theme: only light/dark; icon flips to stay visible
-  useEffect(() => {
-    const root = document.documentElement;
-    root.classList.toggle("theme-dark", theme === "dark");
-    localStorage.setItem("theme-mode", theme);
-  }, [theme]);
 
   // Scrollspy
   useEffect(() => {

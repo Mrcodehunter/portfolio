@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import "./Achievements.css";
 
 const COMPETITIVE = [
@@ -65,24 +66,40 @@ const LEADERSHIP = [
 ];
 
 export default function Achievements() {
-  return (
-    <section id="achievements" className="ach-section">
-      <div className="ach-grid">
-        {/* LEFT: Image + Title Centered */}
-        <div className="ach-left">
-          <img 
-            className="ach-hero-img" 
-            src="/avatar.jpg" 
-            alt="Achievements" 
-          />
-          <h1 className="ach-title">Achievements</h1>
-        </div>
+  const [visible, setVisible] = useState(false);
+  const sectionRef = useRef(null);
 
-        {/* RIGHT: Achievement Cards */}
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisible(true);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
+  return (
+    <section id="achievements" className="ach-section" ref={sectionRef}>
+      <h1 className="ach-title">Achievements</h1>
+      <div className="ach-grid">
         <div className="ach-right">
           <div className="ach-cards">
             {/* Competitive Programming */}
-            <article className="ach-card">
+            <article className={`ach-card ${visible ? 'ach-card-visible' : ''}`} style={{ animationDelay: '0s' }}>
               <h3 className="ach-card-title">Competitive Programming</h3>
               <ul className="ach-list">
                 {COMPETITIVE.map((item, i) => (
@@ -124,7 +141,7 @@ export default function Achievements() {
 
             {/* Leadership & Community */}
             {LEADERSHIP.length > 0 && (
-              <article className="ach-card">
+              <article className={`ach-card ${visible ? 'ach-card-visible' : ''}`} style={{ animationDelay: '0.3s' }}>
                 <h3 className="ach-card-title">Leadership & Community</h3>
                 <ul className="ach-list">
                   {LEADERSHIP.map((item, i) => (
