@@ -4,8 +4,9 @@ jest.mock(
   "react-router-dom",
   () => ({
     BrowserRouter: ({ children }) => <div data-testid="router">{children}</div>,
-    Routes: ({ children }) => <div>{children}</div>,
-    Route: ({ element }) => element,
+    // Keep routing components inert for this smoke test; we only care that App mounts.
+    Routes: () => null,
+    Route: () => null,
   }),
   { virtual: true }
 );
