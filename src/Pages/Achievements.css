@@ -63,29 +63,47 @@
   margin-left: 0;
   margin-right: auto;
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateX(-50px);
 }
 
-/* Slideshow animation */
-@keyframes slideInUp {
+/* Slideshow animations - left cards slide from left */
+@keyframes slideInFromLeft {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateX(-50px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(0);
+  }
+}
+
+/* Right cards slide from right */
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
 .ach-card-visible {
-  animation: slideInUp 0.6s ease-out forwards;
+  animation: slideInFromLeft 0.6s ease-out forwards;
+}
+
+/* Right-aligned cards slide from right */
+.ach-card:nth-child(even).ach-card-visible {
+  animation: slideInFromRight 0.6s ease-out forwards;
 }
 
 /* Alternate cards to the right */
 .ach-card:nth-child(even) {
   margin-left: auto;
   margin-right: 0;
+  transform: translateX(50px); /* Start from right for right-aligned cards */
 }
 
 .theme-dark .ach-card {

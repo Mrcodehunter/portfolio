@@ -7,7 +7,6 @@ export default function Contact() {
       <div className="ct-grid">
         <div className="ct-right">
           <div className="ct-links-container">
-            <h2 className="ct-links-title">Get in Touch</h2>
             <ul className="ct-links">
               <li>
                 <span className="ct-icon">{MailIcon()}</span>

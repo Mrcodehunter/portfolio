@@ -59,23 +59,40 @@
   position: relative;
   z-index: 1;
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateX(-50px);
 }
 
-/* Slideshow animation */
-@keyframes slideInUp {
+/* Slideshow animations - left items slide from left */
+@keyframes slideInFromLeft {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateX(-50px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(0);
+  }
+}
+
+/* Right items slide from right */
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
 .exp-item-visible {
-  animation: slideInUp 0.6s ease-out forwards;
+  animation: slideInFromLeft 0.6s ease-out forwards;
+}
+
+/* Right-aligned items slide from right */
+.exp-item:nth-child(even).exp-item-visible {
+  animation: slideInFromRight 0.6s ease-out forwards;
 }
 
 
@@ -85,6 +102,7 @@
   margin-right: 0;
   border-left: none;
   border-right: 4px solid rgba(255, 255, 255, 0.4);
+  transform: translateX(50px); /* Start from right for right-aligned items */
 }
 
 /* Different colors for each item in light mode */
