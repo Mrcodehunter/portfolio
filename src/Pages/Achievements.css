@@ -1,53 +1,46 @@
-/* Container & Grid Setup (Matches Experience) */
+/* Container & Grid Setup with Gradient */
 .ach-section {
-  padding: 60px 20px;
-  background-color: var(--bg);
-  color: var(--fg);
+  padding: 60px 0;
+  /* Light mode gradient - Light gray shades */
+  background: linear-gradient(135deg, #fcfcfc 0%, #e5e5e5 100%);
+  color: #333333;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Dark mode gradient */
+.theme-dark .ach-section {
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #2d2d2d 100%);
 }
 
 .ach-grid {
   max-width: 1100px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 30% 1fr;
-  gap: 40px;
-}
-
-/* --- Left Column (Title & Image) --- */
-.ach-left {
-  position: sticky;
-  top: 100px;
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.ach-hero-img {
-  width: 180px;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 50%;
-  margin-bottom: 20px;
-  border: 4px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  padding: 0 20px;
+  position: relative;
+  z-index: 1;
 }
 
 .ach-title {
   font-size: 32px;
   font-weight: 700;
-  margin: 0;
-  color: var(--fg);
+  margin: 0 0 40px 0;
+  color: #333333;
   text-transform: uppercase;
   letter-spacing: 1px;
+  text-align: center;
 }
 
-/* --- Right Column (Cards) --- */
+.theme-dark .ach-title {
+  color: #ffffff;
+}
+
 .ach-right {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  position: relative;
+  z-index: 2;
 }
 
 .ach-cards {
@@ -58,16 +51,51 @@
 
 /* Individual Card Styling */
 .ach-card {
-  background-color: var(--bg);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  background-color: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   padding: 24px;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  color: #333;
+  max-width: 85%;
+  margin-left: 0;
+  margin-right: auto;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* Slideshow animation */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ach-card-visible {
+  animation: slideInUp 0.6s ease-out forwards;
+}
+
+/* Alternate cards to the right */
+.ach-card:nth-child(even) {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.theme-dark .ach-card {
+  background-color: rgba(15, 32, 39, 0.95);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #e0e0e0;
 }
 
 .ach-card:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   transform: translateY(-2px);
 }
 
@@ -75,9 +103,13 @@
   font-size: 20px;
   font-weight: 700;
   margin: 0 0 20px 0;
-  color: var(--fg);
+  color: inherit;
   border-bottom: 2px solid rgba(0, 0, 0, 0.1);
   padding-bottom: 12px;
+}
+
+.theme-dark .ach-card-title {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Achievement List */
@@ -92,15 +124,25 @@
 
 .ach-item {
   padding: 16px;
-  background-color: #f9f9f9;
+  background-color: rgba(255, 255, 255, 0.6);
   border-radius: 8px;
-  border-left: 3px solid #007bff;
+  border-left: 3px solid #11998e;
   transition: all 0.2s ease;
 }
 
+.theme-dark .ach-item {
+  background-color: rgba(15, 32, 39, 0.6);
+  border-left-color: #38ef7d;
+}
+
 .ach-item:hover {
-  background-color: #f0f0f0;
-  border-left-color: #0056b3;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-left-color: #0d7a6f;
+}
+
+.theme-dark .ach-item:hover {
+  background-color: rgba(15, 32, 39, 0.8);
+  border-left-color: #2ddb6a;
 }
 
 .ach-item-header {
@@ -114,7 +156,11 @@
 .ach-achievement {
   font-size: 16px;
   font-weight: 600;
-  color: #007bff;
+  color: #333333;
+}
+
+.theme-dark .ach-achievement {
+  color: #cccccc;
 }
 
 .ach-details {
@@ -123,11 +169,19 @@
   font-weight: 400;
 }
 
+.theme-dark .ach-details {
+  color: #b0b0b0;
+}
+
 .ach-event {
   font-size: 15px;
   color: #444;
   line-height: 1.5;
   margin-top: 4px;
+}
+
+.theme-dark .ach-event {
+  color: #d0d0d0;
 }
 
 .ach-item-details {
@@ -138,19 +192,31 @@
   font-style: italic;
 }
 
+.theme-dark .ach-item-details {
+  color: #b0b0b0;
+}
+
 .ach-link {
   display: inline-block;
   margin-top: 8px;
   font-size: 14px;
-  color: #007bff;
+  color: #666666;
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s ease;
 }
 
+.theme-dark .ach-link {
+  color: #aaaaaa;
+}
+
 .ach-link:hover {
-  color: #0056b3;
+  color: #333333;
   text-decoration: underline;
+}
+
+.theme-dark .ach-link:hover {
+  color: #cccccc;
 }
 
 .ach-links {
@@ -162,9 +228,14 @@
 
 /* Responsive */
 @media (max-width: 768px) {
+  .ach-section {
+    padding: 40px 0;
+  }
+
   .ach-grid {
     grid-template-columns: 1fr;
     gap: 30px;
+    padding: 0 16px;
   }
 
   .ach-left {

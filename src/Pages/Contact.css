@@ -1,70 +1,73 @@
-/* Container & Grid Setup (Matches Experience) */
+/* Container & Grid Setup with Gradient */
 .ct-section {
-  padding: 60px 20px;
-  background-color: var(--bg);
-  color: var(--fg);
+  padding: 60px 0;
+  /* Light mode gradient - Light gray shades */
+  background: linear-gradient(135deg, #fafafa 0%, #e3e3e3 100%);
+  color: #333333;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Dark mode gradient */
+.theme-dark .ct-section {
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #2d2d2d 100%);
 }
 
 .ct-grid {
   max-width: 1100px;
   margin: 0 auto;
-  display: grid;
-  /* LEFT (Title) takes ~30%, RIGHT (Content) takes rest */
-  grid-template-columns: 30% 1fr; 
-  gap: 40px;
-}
-
-/* --- Left Column (Matches Experience) --- */
-.ct-left {
-  position: sticky;
-  top: 100px; 
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
-  align-items: center; 
-  text-align: center;
-}
-
-.ct-hero-img {
-  width: 180px;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 50%;
-  margin-bottom: 20px;
-  border: 4px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  padding: 0 20px;
+  position: relative;
+  z-index: 1;
 }
 
 .ct-title {
   font-size: 32px;
   font-weight: 700;
-  margin: 0;
-  color: var(--fg);
+  margin: 0 0 40px 0;
+  color: #333333;
   text-transform: uppercase;
   letter-spacing: 1px;
+  text-align: center;
 }
 
-/* --- Right Column (Form & Links) --- */
+.theme-dark .ct-title {
+  color: #ffffff;
+}
+
 .ct-right {
   display: flex;
   flex-direction: column;
   gap: 40px;
+  position: relative;
+  z-index: 2;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 /* 1. Contact Form Card */
 .ct-card {
-  background-color: var(--bg);
-  border: 1px solid rgba(0,0,0,0.08);
+  background-color: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   padding: 32px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  color: #333;
+}
+
+.theme-dark .ct-card {
+  background-color: rgba(15, 32, 39, 0.95);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #e0e0e0;
 }
 
 .ct-card-title {
   margin: 0 0 24px 0;
   font-size: 24px;
   font-weight: 600;
-  color: var(--fg);
+  color: inherit;
 }
 
 .ct-form {
@@ -106,6 +109,10 @@
   color: #666;
 }
 
+.theme-dark .ct-group label {
+  color: #b0b0b0;
+}
+
 .ct-group input,
 .ct-group textarea {
   width: 100%;
@@ -115,21 +122,35 @@
   background-color: #f9f9f9; /* Slight contrast input bg */
   font-size: 15px;
   transition: all 0.2s;
-  color: var(--fg);
+  color: #333;
+}
+
+.theme-dark .ct-group input,
+.theme-dark .ct-group textarea {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #e0e0e0;
 }
 
 .ct-group input:focus,
 .ct-group textarea:focus {
   outline: none;
-  border-color: #007bff;
+  border-color: #666666;
   background-color: #fff;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+  box-shadow: 0 0 0 3px rgba(102, 102, 102, 0.2);
+}
+
+.theme-dark .ct-group input:focus,
+.theme-dark .ct-group textarea:focus {
+  border-color: #aaaaaa;
+  background-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 3px rgba(170, 170, 170, 0.2);
 }
 
 .ct-submit-btn {
   margin-top: 10px;
   padding: 12px 24px;
-  background-color: #007bff;
+  background-color: #666666;
   color: white;
   font-weight: 600;
   border: none;
@@ -139,8 +160,17 @@
   align-self: flex-start; /* Left align button */
 }
 
+.theme-dark .ct-submit-btn {
+  background-color: #aaaaaa;
+}
+
 .ct-submit-btn:hover {
-  background-color: #0056b3;
+  background-color: #444444;
+}
+
+.theme-dark .ct-submit-btn:hover {
+  background-color: #cccccc;
+  color: #000000;
 }
 
 /* 2. Quick Links Section */
@@ -152,7 +182,11 @@
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 16px;
-  color: #444;
+  color: #ffffff;
+}
+
+.theme-dark .ct-links-title {
+  color: #ffffff;
 }
 
 .ct-links {
@@ -174,8 +208,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #555;
+  color: #333333;
   flex-shrink: 0;
+  opacity: 0.9;
+}
+
+.theme-dark .ct-icon {
+  color: #ffffff;
 }
 
 .ct-icon svg {
@@ -186,21 +225,35 @@
 
 .ct-link-text {
   font-size: 16px;
-  color: #555;
+  color: #333333;
   font-weight: 500;
   text-decoration: none;
   transition: color 0.2s;
 }
 
+.theme-dark .ct-link-text {
+  color: #ffffff;
+}
+
 .ct-link-text:hover {
-  color: #007bff;
+  color: #666666;
+  text-decoration: underline;
+}
+
+.theme-dark .ct-link-text:hover {
+  color: #cccccc;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
+  .ct-section {
+    padding: 40px 0;
+  }
+
   .ct-grid {
     grid-template-columns: 1fr;
     gap: 30px;
+    padding: 0 16px;
   }
 
   .ct-left {

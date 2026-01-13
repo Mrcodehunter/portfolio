@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import "./Projects.css";
 
 const PROJECTS = [
@@ -21,24 +22,40 @@ const PROJECTS = [
 ];
 
 export default function Projects() {
-  return (
-    <section id="projects" className="prj-section">
-      <div className="prj-grid">
-        {/* LEFT: Image + Title Centered */}
-        <div className="prj-left">
-          <img 
-            className="prj-hero-img" 
-            src="/avatar.jpg" 
-            alt="Projects" 
-          />
-          <h1 className="prj-title">Projects</h1>
-        </div>
+  const [visible, setVisible] = useState(false);
+  const sectionRef = useRef(null);
 
-        {/* RIGHT: Project List */}
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisible(true);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
+  return (
+    <section id="projects" className="prj-section" ref={sectionRef}>
+      <h1 className="prj-title">Projects</h1>
+      <div className="prj-grid">
         <div className="prj-right">
           <div className="prj-list">
             {PROJECTS.map((p, i) => (
-              <article className="prj-card" key={i}>
+              <article className={`prj-card ${visible ? 'prj-card-visible' : ''}`} key={i} style={{ animationDelay: `${i * 0.2}s` }}>
                 <header className="prj-head">
                   <h3 className="prj-name">{p.title}</h3>
                 </header>
