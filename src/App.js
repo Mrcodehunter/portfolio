@@ -8,7 +8,6 @@ import Experience from "./Pages/Experience";
 import Projects from "./Pages/Projects";
 import Achievements from "./Pages/Achievements";
 import Publications from "./Pages/Publications";
-import PostsPreview from "./Pages/PostsPreview";  // two-card preview
 import PostsPage from "./Pages/Posts";        // full list with expand
 
 function LandingSections() {
