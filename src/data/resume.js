@@ -28,6 +28,21 @@ export const PROFILE = {
   },
 };
 
+/** One-sentence hero statement. Keep it short — it renders at display size. */
+export const HEADLINE =
+  "I build cloud platforms, event-driven systems and AI agents.";
+
+export const HERO_SUMMARY =
+  "Software engineer with four years across Azure architecture, distributed systems and applied machine learning. Most recently consulting on KPMG's automation platform through Cefalo Bangladesh.";
+
+/** Stat strip on the home page. Keep to four — the grid is built for it. */
+export const HIGHLIGHTS = [
+  { value: "4 yrs", label: "Engineering experience" },
+  { value: "~95%", label: "Manual work cut by nTAAP" },
+  { value: "1,500+", label: "Problems solved" },
+  { value: "2", label: "Published papers" },
+];
+
 export const BIO = [
   "Software engineer with four years of experience building web and cloud applications, most recently as a consultant on KPMG's Azure automation programme through Cefalo Bangladesh. I care about clean, maintainable code and reliable delivery.",
   "My work has centred on distributed systems and cloud architecture — event-driven microservices on Azure Service Bus and Redis, a Cosmos Graph DB integration with a custom Gremlin adapter, and a full-stack RBAC framework built on Azure Entra ID. I led test automation to beyond 90% line and branch coverage, and ran the operational backbone of the platform through Key Vault, Application Insights and Log Analytics.",
@@ -332,18 +347,13 @@ export const LEADERSHIP = [
 ];
 
 /* ========================================================================== *
- * Navigation — drives both the navbar links and the scrollspy targets.
- * Every entry with a "#" href must have a matching <section id> in App.js.
+ * Navigation — every `to` must match a <Route path> in src/App.js.
  * ========================================================================== */
 
 export const NAV_ITEMS = [
-  { label: "Home", href: "#home" },
-  { label: "Skills", href: "#skills" },
-  { label: "Experience", href: "#experience" },
-  { label: "Projects", href: "#projects" },
-  { label: "Publications", href: "#publications" },
-  { label: "Education", href: "#education" },
-  { label: "Achievements", href: "#achievements" },
-  { label: "CV", href: "/CV.pdf", external: true },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", to: "/" },
+  { label: "About", to: "/about" },
+  { label: "Projects", to: "/projects" },
+  { label: "Research", to: "/research" },
+  { label: "Contact", to: "/contact" },
 ];

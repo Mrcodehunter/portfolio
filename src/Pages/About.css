@@ -1,0 +1,195 @@
+.about-bio {
+  max-width: 68ch;
+  margin-top: var(--space-5);
+}
+
+.about-bio p {
+  color: var(--fg-muted);
+}
+
+.about-bio p + p {
+  margin-top: var(--space-4);
+}
+
+.about-section {
+  margin-top: var(--space-8);
+}
+
+/* ---------------- Timeline ---------------- */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-7);
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: var(--space-5);
+}
+
+.timeline-meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.timeline-location {
+  font-size: var(--text-sm);
+  color: var(--fg-subtle);
+}
+
+/* Left rule with an accent node marking each role */
+.timeline-body {
+  position: relative;
+  padding-left: var(--space-5);
+  border-left: 1px solid var(--border);
+}
+
+.timeline-body::before {
+  content: "";
+  position: absolute;
+  left: -4px;
+  top: 0.55em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.timeline-role {
+  font-size: var(--text-lg);
+}
+
+.timeline-company {
+  color: var(--fg-muted);
+  font-size: var(--text-sm);
+  margin-top: var(--space-1);
+}
+
+.timeline-client {
+  color: var(--fg-subtle);
+}
+
+.timeline-bullets {
+  margin-top: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.timeline-bullets li {
+  position: relative;
+  padding-left: var(--space-5);
+  color: var(--fg-muted);
+  font-size: var(--text-sm);
+}
+
+.timeline-bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 6px;
+  height: 1px;
+  background: var(--border-strong);
+}
+
+/* ---------------- Cards ---------------- */
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--space-4);
+}
+
+.about-card-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.about-card-head h3 {
+  font-size: var(--text-lg);
+}
+
+.about-card-sub {
+  color: var(--fg-muted);
+  font-size: var(--text-sm);
+  margin-top: var(--space-1);
+}
+
+.about-card-text {
+  color: var(--fg-muted);
+  font-size: var(--text-sm);
+  margin-top: var(--space-3);
+}
+
+.about-card-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border);
+}
+
+/* ---------------- Awards ---------------- */
+.award-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.award {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: var(--space-5);
+  padding-block: var(--space-4);
+  border-top: 1px solid var(--border);
+}
+
+.award:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+.award-rank {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.award-event {
+  color: var(--fg);
+  font-size: var(--text-sm);
+}
+
+.award-details {
+  color: var(--fg-subtle);
+  font-size: var(--text-sm);
+  margin-top: var(--space-1);
+}
+
+.award-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-top: var(--space-2);
+}
+
+/* ---------------- Responsive ---------------- */
+@media (max-width: 780px) {
+  .timeline-item,
+  .award {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+
+  .timeline-meta {
+    flex-direction: row;
+    gap: var(--space-3);
+  }
+
+  .timeline-body {
+    padding-left: var(--space-4);
+  }
+}

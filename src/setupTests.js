@@ -33,3 +33,7 @@ window.IntersectionObserver = MockIntersectionObserver;
 if (!Element.prototype.scrollIntoView) {
   Element.prototype.scrollIntoView = function scrollIntoView() {};
 }
+
+// jsdom does not implement window.scrollTo and logs an error for every call;
+// Layout resets scroll on each navigation, so stub it to keep output clean.
+window.scrollTo = function scrollTo() {};

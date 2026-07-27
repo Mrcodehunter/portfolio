@@ -1,0 +1,73 @@
+.res-scholar {
+  margin-top: var(--space-5);
+}
+
+.res-list {
+  margin-top: var(--space-8);
+  display: flex;
+  flex-direction: column;
+}
+
+.res {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: var(--space-5);
+  padding-block: var(--space-6);
+  border-top: 1px solid var(--border);
+}
+
+.res:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+.res-year {
+  color: var(--accent);
+  padding-top: 0.3rem;
+}
+
+.res-title {
+  font-size: var(--text-xl);
+  max-width: 60ch;
+}
+
+.res-authors {
+  font-size: var(--text-sm);
+  color: var(--fg-muted);
+  margin-top: var(--space-3);
+}
+
+.res-venue {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--fg-subtle);
+  margin-top: var(--space-1);
+}
+
+.res-abstract {
+  color: var(--fg-muted);
+  font-size: var(--text-sm);
+  margin-top: var(--space-4);
+  max-width: 72ch;
+}
+
+.res-tags {
+  margin-top: var(--space-4);
+}
+
+.res-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+  margin-top: var(--space-4);
+}
+
+@media (max-width: 700px) {
+  .res {
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+  }
+
+  .res-year {
+    padding-top: 0;
+  }
+}

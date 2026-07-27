@@ -1,62 +1,65 @@
 import "./Projects.css";
 import { PROJECTS } from "./../data/resume";
-import useReveal from "./../hooks/useReveal";
+import useDocumentTitle from "./../hooks/useDocumentTitle";
+import { ArrowUpRightIcon } from "./../components/Icons";
 
 export default function Projects() {
-  const [sectionRef, visible] = useReveal();
+  useDocumentTitle("Projects");
 
   return (
-    <section id="projects" className="prj-section" ref={sectionRef}>
-      <h1 className="prj-title">Projects</h1>
-      <div className="prj-grid">
-        <div className="prj-right">
-          <div className="prj-list">
-            {PROJECTS.map((p, i) => (
-              <article
-                className={`prj-card ${visible ? "prj-card-visible" : ""}`}
-                key={p.title}
-                style={{ animationDelay: `${i * 0.2}s` }}
-              >
-                <header className="prj-head">
-                  <h3 className="prj-name">{p.title}</h3>
-                  <div className="prj-year">
-                    {p.year}
-                    {p.featured && <span className="prj-badge">Featured</span>}
-                  </div>
-                </header>
+    <div className="shell page">
+      <header>
+        <p className="eyebrow">Projects</p>
+        <h1 className="page-title">Selected work</h1>
+        <p className="lede">
+          Platforms and systems I have designed and built — from an Azure automation
+          platform serving a global consultancy to sandboxed AI agents.
+        </p>
+      </header>
 
-                <p className="prj-description">{p.description}</p>
+      <ol className="prj-list">
+        {PROJECTS.map((p, i) => (
+          <li className="prj" key={p.title}>
+            <div className="prj-index mono">{String(i + 1).padStart(2, "0")}</div>
 
-                {p.tech?.length > 0 && (
-                  <ul className="prj-tags">
-                    {p.tech.map((t) => (
-                      <li key={t}>{t}</li>
-                    ))}
-                  </ul>
-                )}
+            <div className="prj-body">
+              <div className="prj-head">
+                <h2 className="prj-name">{p.title}</h2>
+                <div className="prj-meta">
+                  {p.featured && <span className="prj-badge">Featured</span>}
+                  <span className="mono">{p.year}</span>
+                </div>
+              </div>
 
-                {p.links?.length > 0 && (
-                  <div className="prj-links">
-                    {p.links.map((l) => (
-                      <a
-                        key={l.href}
-                        href={l.href}
-                        target={l.external ? "_blank" : undefined}
-                        rel={l.external ? "noopener noreferrer" : undefined}
-                        className="prj-link-btn"
-                      >
-                        {l.label}
-                      </a>
-                    ))}
-                  </div>
-                )}
+              <p className="prj-desc">{p.description}</p>
 
-                {p.note && <p className="prj-note">{p.note}</p>}
-              </article>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
+              <ul className="tag-list prj-tech">
+                {p.tech.map((t) => (
+                  <li className="tag" key={t}>
+                    {t}
+                  </li>
+                ))}
+              </ul>
+
+              <div className="prj-foot">
+                {p.links.map((l) => (
+                  <a
+                    key={l.href}
+                    className="link-arrow"
+                    href={l.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {l.label}
+                    <ArrowUpRightIcon width={13} height={13} />
+                  </a>
+                ))}
+                {p.note && <span className="prj-note">{p.note}</span>}
+              </div>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
   );
 }
